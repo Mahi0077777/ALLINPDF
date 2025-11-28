@@ -17,7 +17,7 @@
       gtag('config', 'G-MEASUREMENT_ID');
     </script>
     
-    <!-- Primary Meta Tags -->
+    <!-- Primary Meta Tags (Generic Fallbacks - Dynamic tags managed by SEO.tsx) -->
     <title>FreeProPDF - The #1 Free Online PDF Tools (100% Private)</title>
     <meta name="description" content="The world's fastest free PDF tools. Merge, Split, Compress, and Convert PDFs directly in your browser. No uploads, no sign-ups, 100% privacy guaranteed.">
     <meta name="keywords" content="merge pdf, split pdf, compress pdf free, pdf to jpg, jpg to pdf, rotate pdf, unlock pdf, protect pdf, add page numbers pdf, free pdf tools, client side pdf, private pdf editor, offline pdf tools, browser pdf tools, no upload pdf tools, best pdf merger 2025">
@@ -33,6 +33,11 @@
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <link rel="dns-prefetch" href="https://aistudiocdn.com">
     <link rel="preconnect" href="https://aistudiocdn.com" crossorigin>
+
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
     <!-- Tailwind CSS with Typography Plugin -->
     <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
@@ -84,7 +89,19 @@
     <!-- Confetti for Viral Dopamine Hit -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js" defer></script>
     
-    <script type="importmap">
+    <!-- Service Worker Registration -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js').then(registration => {
+            console.log('SW registered');
+          }).catch(registrationError => {
+            console.log('SW registration failed');
+          });
+        });
+      }
+    </script>
+  <script type="importmap">
 {
   "imports": {
     "lucide-react": "https://aistudiocdn.com/lucide-react@^0.554.0",
@@ -97,15 +114,14 @@
     "path": "https://aistudiocdn.com/path@^0.12.7",
     "vite": "https://aistudiocdn.com/vite@^7.2.4",
     "@vitejs/plugin-react": "https://aistudiocdn.com/@vitejs/plugin-react@^5.1.1",
-    "jszip": "https://aistudiocdn.com/jszip@^3.10.1",
-    "url": "https://aistudiocdn.com/url@^0.11.4"
+    "jszip": "https://aistudiocdn.com/jszip@^3.10.1"
   }
 }
 </script>
-  <link rel="stylesheet" href="/index.css">
+<link rel="stylesheet" href="/index.css">
 </head>
   <body class="bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-100 transition-colors duration-200 antialiased selection:bg-brand-200 selection:text-brand-900">
     <div id="root"></div>
-    <script type="module" src="/index.tsx"></script>
-  </body>
+  <script type="module" src="/index.tsx"></script>
+</body>
 </html>
